@@ -6,8 +6,9 @@
            <?php
             include("./middleware/authMiddleware.php");
             if (isLoggedIn()) {
-
+                // Todo: Use avatar icon instead of the user profie picture
                 echo '<div>
+                
                 <img
                 class="h-9 w-9 cursor-pointer avatar rounded-full bg-white"
                 src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png" />
@@ -15,8 +16,8 @@
                 //Todo: Add Hover 
             } else {
                 echo '<div class=" w-64 flex justify-center items-center">
-               <button class="bg-red-500 text-white font-semibold py-2 px-3 rounded-lg mx-2">Sign Up</button>
-               <button class="border-red-500 border-2 text-red-500 font-semibold py-2 px-3 rounded-lg mx-2">Log In</button>
+               <a href="signup.php" class="bg-red-500 text-white font-semibold py-2 px-3 rounded-lg mx-2">Sign Up</a>
+               <a href="login.php" class="border-red-500 border-2 text-red-500 font-semibold py-2 px-3 rounded-lg mx-2">Log In</a>
            </div>';
             }
             ?>

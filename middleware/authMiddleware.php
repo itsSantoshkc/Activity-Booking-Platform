@@ -1,4 +1,5 @@
 <?php
+include("conn.php");
 function isLoggedIn()
 {
     if (isset($_SESSION["userID"]) && !empty($_SESSION["userID"])) {

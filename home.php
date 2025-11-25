@@ -42,7 +42,7 @@ include("header.php");
 
   <div class="min-h-screen w-full flex items-center justify-center">
     <div
-      class="grid grid-cols-3 gap-5 w-3/4 place-items-center"
+      class="grid grid-cols-3 gap-x-24 gap-y-12 w-4/5 place-items-center"
       id="content"></div>
   </div>
 </body>
