@@ -170,4 +170,50 @@ public function searchActivities($location, $date, $people) {
     }
     return $activities;
 }
+
+public function getActivityById($id)
+{
+ 
+    $sql = "SELECT a.*, 
+            GROUP_CONCAT(DISTINCT i.image_path SEPARATOR '|') as image_list
+            FROM activity a
+            LEFT JOIN activity_images i ON a.activity_id = i.activity_id
+            WHERE a.activity_id = ?
+            GROUP BY a.activity_id";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $activity = $result->fetch_assoc();
+
+    if (!$activity) return null;
+
+   
+    $activity['images'] = $activity['image_list'] ? explode('|', $activity['image_list']) : [];
+    unset($activity['image_list']);
+
+    $slotStmt = $this->conn->prepare("SELECT time_slots FROM activity_slots WHERE activity_id = ?");
+    $slotStmt->bind_param("s", $id);
+    $slotStmt->execute();
+    $slotResult = $slotStmt->get_result();
+    $activity['time_slots'] = [];
+    while ($slot = $slotResult->fetch_assoc()) {
+        $activity['time_slots'][] = $slot['time_slots'];
+    }
+
+
+    if ($activity['event_type'] === 'recurring') {
+        $dayStmt = $this->conn->prepare("SELECT day_id FROM activity_days WHERE activity_id = ?");
+        $dayStmt->bind_param("s", $id);
+        $dayStmt->execute();
+        $dayResult = $dayStmt->get_result();
+        $activity['days'] = [];
+        while ($day = $dayResult->fetch_assoc()) {
+            $activity['days'][] = $day['day_id'];
+        }
+    }
+
+    return $activity;
+}
 }

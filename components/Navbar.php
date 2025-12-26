@@ -1,7 +1,7 @@
    <script src="https://kit.fontawesome.com/e07ff84049.js" crossorigin="anonymous"></script>
    <nav
        class="w-screen h-16  bg-white flex justify-between items-center *:mx-28  shadow-md ">
-       <a class="font-bold text-2xl cursor-pointer" href="home.php"><i class="fa-solid fa-plane-departure"></i> Activity Booking</a>
+       <a class="text-2xl font-bold cursor-pointer" href="index.php"><i class="fa-solid fa-plane-departure"></i> Activity Booking</a>
        <div class="relative flex flex-col items-center">
            <?php
             include("./middleware/authMiddleware.php");
@@ -10,14 +10,14 @@
                 echo '<div>
                 
                 <img
-                class="h-9 w-9 cursor-pointer avatar rounded-full bg-white"
+                class="bg-white rounded-full cursor-pointer h-9 w-9 avatar"
                 src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png" />
                 </div>';
                 //Todo: Add Hover 
             } else {
-                echo '<div class=" w-64 flex justify-center items-center">
-               <a href="signup.php" class="bg-red-500 text-white font-semibold py-2 px-3 rounded-lg mx-2">Sign Up</a>
-               <a href="login.php" class="border-red-500 border-2 text-red-500 font-semibold py-2 px-3 rounded-lg mx-2">Log In</a>
+                echo '<div class="flex items-center justify-center w-64 ">
+               <a href="signup.php" class="px-3 py-2 mx-2 font-semibold text-white bg-red-500 rounded-lg">Sign Up</a>
+               <a href="login.php" class="px-3 py-2 mx-2 font-semibold text-red-500 border-2 border-red-500 rounded-lg">Log In</a>
            </div>';
             }
             ?>

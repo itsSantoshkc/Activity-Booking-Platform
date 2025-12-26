@@ -46,6 +46,16 @@ CREATE TABLE activity_slots (
     FOREIGN KEY (activity_id) REFERENCES activity(activity_id) ON DELETE CASCADE
 );
 
+CREATE TABLE reviews (
+    userId VARCHAR(36) NOT NULL,
+    activityID VARCHAR(100) NOT NULL,
+    rating INT NOT NULL,
+    review TEXT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES user(userID),
+    FOREIGN KEY (activityID) REFERENCES activity(activity_id)
+);
+
 
 -- BOOKING 
 

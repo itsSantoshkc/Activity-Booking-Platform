@@ -59,9 +59,9 @@ include("model/Activity.php");
     if (!empty($data['images'])) {
         $imagePath = str_replace('../', '', $baseUrl . $data['images'][0]);
     }
-
     echo "
-    <div class='mb-8'>
+    <a class='mb-8' href='activity.php?activity={$data['activity_id']}'>
+    
       <div class='max-h-[90%] w-full relative'>
         <img
           class='z-0 object-cover w-full h-[300px] rounded-3xl'
@@ -77,7 +77,7 @@ include("model/Activity.php");
         <p class='text-xl font-semibold text-gray-600'>{$data['location']}</p>
         <p class='text-2xl font-bold text-green-600'>Rs. {$data['price']}</p>
       </div>
-    </div>";
+    </a>";
   }
 } catch (Exception $e) {
   echo $e->getMessage();
