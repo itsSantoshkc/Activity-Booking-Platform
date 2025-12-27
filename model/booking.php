@@ -75,20 +75,39 @@ class Booking
     /**
      * For User: See all my personal bookings with activity details
      */
-    public function getBookingsByUserId($userId)
-    {
-        $sql = "SELECT b.*, a.name as activity_name, a.location, a.price,
-                (SELECT image_path FROM activity_images WHERE activity_id = a.activity_id LIMIT 1) as thumbnail
-                FROM booking b
-                JOIN activity a ON b.activity_id = a.activity_id
-                WHERE b.user_id = ?
-                ORDER BY b.booked_for ASC";
+ public function getBookingsByUserId($userId)
+{
+    // 1. Double check your column names (e.g., is it activity_id or id?)
+    $sql = "SELECT 
+                b.booking_id, 
+                b.no_of_slots, 
+                b.time, 
+                b.booked_for, 
+                a.name as activity_name, 
+                a.location, 
+                a.price
+            FROM booking b
+            INNER JOIN activity a ON b.activity_id = a.activity_id
+            WHERE b.user_id = ?
+            ORDER BY b.booked_for ASC, b.time ASC";
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("s", $userId);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt = $this->conn->prepare($sql);
+    
+    if (!$stmt) {
+        error_log("SQL Prepare Error: " . $this->conn->error);
+        return [];
     }
+
+    // 2. Use "i" if your user_id is a number in the DB, "s" if it's a string/UUID
+    $type = is_numeric($userId) ? "i" : "s";
+    $stmt->bind_param($type, $userId);
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // 3. Return the full associative array
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 
     /**
      * Get details of a single booking

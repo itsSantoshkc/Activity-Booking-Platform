@@ -29,10 +29,10 @@
                    class="hover:bg-[#2B2D42] rounded-xl hover:text-white w-[90%] py-2 text-center">
                    Manage profile
                </div>
-               <div
+               <a href="recentBooking.php"
                    class="hover:bg-[#2B2D42] rounded-xl hover:text-white w-[90%] py-2 text-center">
                    View Booking
-               </div>
+        </a>
 
 
 
