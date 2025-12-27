@@ -12,15 +12,17 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 
-$name = trim($_POST['name'] ?? '');
+$firstName = trim($_POST['firstName'] ?? '');
+$lastName = trim($_POST['lastName'] ?? '');
 $email = trim($_POST['email'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
+$dob = trim($_POST['dob'] ?? '');
 $password = $_POST['password'] ?? '';
 
 
 
 
-if (empty($name) || empty($email) || empty($phone) || empty($password)) {
+if (empty($firstName) ||empty($lastName) || empty($email) || empty($phone) || empty($password)) {
     http_response_code(400);
     echo json_encode([
         "success" => false,
@@ -70,7 +72,7 @@ $hash = password_hash($password, PASSWORD_BCRYPT);
 
 
 $user = new User($conn);
-$newUser =  array("firstName" => $name, "lastName" => $name, "email" => $email, "password" =>  $hash, "dateOfBirth" => 0, "phone" => $phone, "role" => "user");
+$newUser =  array("firstName" => $firstName, "lastName" => $$lastName, "email" => $email, "password" =>  $hash, "dateOfBirth" => $dob, "phone" => $phone, "role" => "user");
 $userData = $user->newUser($newUser);
 
 

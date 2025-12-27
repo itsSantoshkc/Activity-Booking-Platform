@@ -25,10 +25,10 @@
            <div
                class="*:cursor-pointer 
                  *:font-semibold *:text-lg *:transition-all *:duration-500   absolute shadow-md   avatar-menu p-2 bg-white opacity-0 -translate-y-48   rounded-b-xl transition-all font-semibold duration-700 w-44 h-48 hidden flex-col items-center justify-around">
-               <div
+               <a href="manageProfile.php"
                    class="hover:bg-[#2B2D42] rounded-xl hover:text-white w-[90%] py-2 text-center">
                    Manage profile
-               </div>
+        </a>
                <a href="recentBooking.php"
                    class="hover:bg-[#2B2D42] rounded-xl hover:text-white w-[90%] py-2 text-center">
                    View Booking

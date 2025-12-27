@@ -6,6 +6,7 @@ async function validateSignUpData(event) {
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const confirmpassword = document.getElementById("confirmpassword");
+  const dob = document.getElementById("dob");
 
   resetErrorStyle(event);
   if (
@@ -13,7 +14,8 @@ async function validateSignUpData(event) {
     !phone.value ||
     !email.value ||
     !password.value ||
-    !confirmpassword.value
+    !confirmpassword.value||
+    !dob
   ) {
     return showError("Fields cannot be empty");
   }
@@ -30,12 +32,12 @@ async function validateSignUpData(event) {
     return showError("Phone Number should be 10 digits");
   }
 
-  // if (!passwordRegex.test(password.value)) {
-  //   password.style.border = "red solid";
-  //   return showError(
-  //     "Password must contain 1 Uppercae,1 Lower case alphabet,1 Number and ! Special Character"
-  //   );
-  // }
+  if (!passwordRegex.test(password.value)) {
+    password.style.border = "red solid";
+    return showError(
+      "Password must contain 1 Uppercae,1 Lower case alphabet,1 Number and ! Special Character"
+    );
+  }
 
   if (password.value !== confirmpassword.value) {
     password.className = "error-input";
@@ -43,12 +45,15 @@ async function validateSignUpData(event) {
 
     return showError("Password and Confirm password do not match");
   }
+  const firstName = fullName.value.split(" ")[0];
+  const lastName = fullName.value.split(" ")[1];
+  
 
-  const formData = `name=${encodeURIComponent(
-    fullName.value
-  )}&email=${encodeURIComponent(email.value)}&password=${encodeURIComponent(
+  const formData = `firstName=${encodeURIComponent(
+    firstName
+  )}&lastName=${encodeURIComponent(lastName)}&email=${encodeURIComponent(email.value)}&password=${encodeURIComponent(
     password.value
-  )}&phone=${encodeURIComponent(phone.value)}`;
+  )}&phone=${encodeURIComponent(phone.value)}&dob=${encodeURIComponent(dob.value)}`;
 
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "./utilities/registerUser.php", true);

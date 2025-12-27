@@ -97,8 +97,8 @@ $slug = basename($currentPath);
             <a href="newactivity.php">New Activity</a>
         </li>
 
-        <li class="<?= ($slug == 'manageadminprofile.php') ? 'active' : '' ?>">
-            <a href="manageadminprofile.php">Manage Profile</a>
+        <li class="<?= ($slug == 'manageProfile.php') ? 'active' : '' ?>">
+            <a href="manageProfile.php">Manage Profile</a>
         </li>
     </ul>
     <button id="logoutBtn" class="logout-btn">Log Out</button>

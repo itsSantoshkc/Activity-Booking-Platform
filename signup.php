@@ -40,6 +40,14 @@
         placeholder="Enter your phone number"
         required />
 
+      <label for="dob">Date of Birth</label>
+      <input
+        type="date"
+        id="dob"
+        placeholder="Enter your Date of birth"
+        required />
+
+
       <label for="email">Email Address</label>
       <input
         type="email"
